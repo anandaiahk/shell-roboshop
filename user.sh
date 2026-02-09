@@ -67,3 +67,4 @@ systemctl enable user  &>>$LOGS_FILE
 systemctl start user
 VALIDATE $? "enable and start the user"
 
+
