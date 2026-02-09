@@ -33,6 +33,7 @@ VALIDATE $? "enable node js 20"
 
 dnf install nodejs -y &>>$LOGS_FILE
 VALIDATE $? "enable node js 20"
+
 id roboshop &>>$LOGS_FILE
 if [ $? -ne 0 ]; then
     useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOGS_FILE
@@ -73,7 +74,7 @@ dnf install mongodb-mongosh -y &>>$LOGS_FILE
 VALIDATE $? "install mongodb mongosh"
 
 INDEX=$(mongosh --host $MONGODB_HOST --quiet --eval 'db.getMongo().getDBNames().indexOf("catalogue")')
-if [ INDEX -le 0 ]; then
+if [ $INDEX -le 0 ]; then
 
    mongosh --host $MONGODB_HOST </app/db/master-data.js
    VALIDATE $? " loading products"
